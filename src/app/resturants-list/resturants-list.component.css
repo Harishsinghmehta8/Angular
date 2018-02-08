@@ -1,0 +1,18 @@
+thead{
+    color: yellowgreen;
+    background-color: dimgrey
+
+}
+
+
+tbody tr{
+    background-color: lightblue
+}
+
+tbody tr:hover{
+    background-color: yellow
+}
+
+.containerDiv{
+    background-color: lavenderblush
+}

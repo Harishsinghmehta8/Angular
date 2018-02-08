@@ -1,0 +1,54 @@
+<div [ngClass]="{'containerDiv':true}">
+  <div class="card-heading">
+    {{pageTitle}}
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-2"> filter by: </div>
+      <div class="col-md-4">
+        <!--<input type="text" [(ngModel)]='listFilter' />       -->
+          <!--<input type="text" [value]='listFilter' (input)='listFilter=$event.target.value' />  -->
+          <input type="text" [ngModel]='listFilter' (ngModelChange)='listFilter=$event' />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-11">             
+      </div>
+      <div class="col-md-1"> 
+        <button class="btn btn-primary" (click)='addRestaurants' >Add</button>      
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>
+              <button class="btn btn-primary" (click)='toggleImage()'>{{(showImage?'Hide':'Show')}} Image
+                        </button>
+            </th>
+            <th> Title </th>
+            <th> City </th>
+            <th> State </th>
+            <th> 5 Star Rank </th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr *ngFor='let res of resturants|restaurantFilter:listFilter' >
+            <td><img *ngIf='showImage' [src]='res.imageUrl' [title]='res.restaurantTitle' [style.width.px]='imageWidth'><img> </td>
+            <td>{{res.restaurantTitle| uppercase }}</td>
+            <td>{{res.restaurantCity| charDash }}</td>
+            <td>{{res.restaurantState }}</td>
+            <!--<td>{{res.starRating| currency:'INR':false:'0.4'}}</td>-->
+              <!--<td [ngClass]="{'containerDiv':res.starRating>2.5}">{{res.starRating}}</td>-->
+            <!--<td [ngStyle]="{'color':res.starRating>2.5?'green':'blue'}">{{res.starRating}}</td>-->
+          <td [ngStyle]="{'color':res.starRating>2.5?'green':'blue'}">
+            <app-star-rating [rating]='res.starRating' > </app-star-rating>            
+            </td>  
+          </tr>
+        </tbody>
+
+      </table>
+      <!--<p>{{resturants|json}}</p>-->
+    </div>
+  </div>
+</div>
